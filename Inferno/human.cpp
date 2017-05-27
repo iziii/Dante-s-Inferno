@@ -29,7 +29,7 @@ Human::Human()
   //itd...
 }
 
-void Human::committSins(Sin *sin)
+void Human::commitSins(Sin *sin)
 {
 
   int chance = rand () % 100;
@@ -55,7 +55,7 @@ void Human::committSins(Sin *sin)
                 if(it_requirements -> first == it_attributes2 -> first
                    && it_requirements -> second <= it_attributes2 -> second && chance >= 50)
                     {
-                       _commitedSins.push_back(*sin);
+                       _committedSins.push_back(*sin);
                       }
 
               }
@@ -67,7 +67,7 @@ void Human::committSins(Sin *sin)
 
 std::vector<Sin> Human::committedSins()
 {
-  return _commitedSins;
+  return _committedSins;
 }
 
 short Human::lifetime()

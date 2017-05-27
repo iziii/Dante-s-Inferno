@@ -10,14 +10,14 @@ private:
   bool _isBeliever;
   bool _isDead;
   std::map <std::string, int> _attributes;
-  std::vector<Sin> _commitedSins;
+  std::vector<Sin> _committedSins;
 
 public:
   static std::vector <Human> createPeople(int n);
 
   Human();
 
-  void committSins(Sin *sin);
+  void commitSins(Sin *sin);
 
   std::map <std::string, int> attributes();
   std::vector<Sin> committedSins();

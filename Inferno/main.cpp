@@ -47,7 +47,7 @@ for(it_people=people.begin(); it_people!=people.end(); it_people++)
   printf("Grzechy: \n");
 
     for(int i = 0; i<sins.size(); i++)
-      it_people -> committSins(&sins[i]);
+      it_people -> commitSins(&sins[i]);
 
       for(int i=0; i<it_people->committedSins().size(); i++)
         printf("%s \n", it_people -> committedSins()[i].name().c_str());
