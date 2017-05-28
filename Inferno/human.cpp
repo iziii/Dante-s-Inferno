@@ -39,21 +39,20 @@ void Human::commitSins(Sin *sin)
 
   int chance = rand () % 100;
 
-  std::map<std::string, int> requirements = sin -> requirements();
+  std::map <std::string, int> requirements = sin -> requirements();
   std::map<std::string, int>::iterator it_requirements = requirements.begin();
   std::map<std::string, int>::iterator it_attributes1, it_attributes2;
 
-    for(it_attributes1=this -> _attributes.begin();
-          it_attributes1!=this -> _attributes.end();
+  for(it_attributes1 = _attributes.begin();
+          it_attributes1 != _attributes.end();
             it_attributes1++)
   {
-
       if(it_requirements -> first == it_attributes1 -> first
           && it_requirements -> second <= it_attributes1 -> second)
 
           {
-              for(it_requirements++, it_attributes2=this -> _attributes.begin();
-                  it_attributes2!=this -> _attributes.end();
+              for(it_requirements++, it_attributes2 = _attributes.begin();
+                  it_attributes2 != _attributes.end();
                     it_attributes2++)
               {
 
@@ -63,10 +62,8 @@ void Human::commitSins(Sin *sin)
                        _committedSins.push_back(*sin);
                         addSins(sin -> circle());
                       }
-
               }
           }
-
   }
 
 }
