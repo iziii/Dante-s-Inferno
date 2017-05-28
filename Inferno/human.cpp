@@ -17,6 +17,11 @@ Human::Human()
   _lifetime = rand() % 100 + 1;
   _isBeliever = rand() % 2;
 
+  _circle_1 = 0;
+  _circle_2 = 0;
+  _circle_3 = 0;
+  _circle_4 = 0;
+
   _name = Names::name(_gender);
 
   //Cechy, na razie przykladowe:
@@ -56,6 +61,7 @@ void Human::commitSins(Sin *sin)
                    && it_requirements -> second <= it_attributes2 -> second && chance >= 50)
                     {
                        _committedSins.push_back(*sin);
+                       addSins(sin -> circle());
                       }
 
               }
@@ -97,4 +103,19 @@ bool Human::isDead()
 std::map <std::string, int> Human::attributes()
 {
   return _attributes;
+}
+
+void Human::addSins(int whichCircle)
+{
+  switch (whichCircle) {
+    case 1: _circle_1++; break;
+    case 2: _circle_2++; break;
+    case 3: _circle_3++; break;
+    case 4: _circle_4++; break;
+  }
+}
+
+void Human::die()
+{
+  _isDead = true;
 }

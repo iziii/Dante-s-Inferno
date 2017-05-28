@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "sin.h"
 
-Sin::Sin (std::string name, std::string circle, std::string req_name1, std::string req_name2, int req_value1, int req_value2)
+Sin::Sin (std::string name, int circle, std::string req_name1, std::string req_name2, int req_value1, int req_value2)
 {
   _name = name;
   _circle = circle;
@@ -13,8 +13,8 @@ std::vector <Sin> Sin::createSins()
 {
   std::vector <Sin> sins;
 
-  std::string name, circle, req_name1, req_name2;
-  int req_value1, req_value2;
+  std::string name, req_name1, req_name2;
+  int req_value1, req_value2, circle;
 
   std::ifstream file = std::ifstream{"data/sins.txt"};
 
@@ -33,7 +33,7 @@ std::string Sin::name()
   return _name;
 }
 
-std::string Sin::circle()
+int Sin::circle()
 {
   return _circle;
 }
