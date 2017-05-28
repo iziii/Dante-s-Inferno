@@ -1,4 +1,12 @@
-murder krag1 cruel 40 degenerate 40
-sex krag2 lecherous 20 perverse 20
-theft krag3 bad 30 insincere 30
-rape krag4 cruel 30 degenerate 30
+murder 1 cruel 40 degenerate 40
+sex 2 lecherous 20 perverse 20
+theft 3 bad 30 insincere 30
+rape 4 cruel 30 degenerate 30
+jakisgrzech 1 cruel 70 bad 30
+jakisgrzech 1 insincere 50 bad 66
+jakisgrzech 2 lecherous 80 bad 30
+jakisgrzech 2 lecherous 80 cruel 40
+jakisgrzech 3 bad 30 degenerate 80
+jakisgrzech 3 bad 30 lecherous 44
+jakisgrzech 4 bad 30 lecherous 80
+jakisgrzech 4 degenerate 67 lecherous 22
