@@ -61,7 +61,7 @@ void Human::commitSins(Sin *sin)
                    && it_requirements -> second <= it_attributes2 -> second && chance >= 50)
                     {
                        _committedSins.push_back(*sin);
-                       addSins(sin -> circle());
+                        addSins(sin -> circle());
                       }
 
               }
@@ -71,15 +71,21 @@ void Human::commitSins(Sin *sin)
 
 }
 
-std::vector<Sin> Human::committedSins()
+void Human::addSins(int whichCircle)
 {
-  return _committedSins;
+  switch (whichCircle) {
+    case 1: _circle_1++; break;
+    case 2: _circle_2++; break;
+    case 3: _circle_3++; break;
+    case 4: _circle_4++; break;
+  }
 }
 
-short Human::lifetime()
+void Human::die()
 {
-  return _lifetime;
+  _isDead = true;
 }
+
 std::string Human::name()
 {
   return _name;
@@ -88,6 +94,11 @@ std::string Human::name()
 enum gender Human::gender()
 {
   return _gender;
+}
+
+short Human::lifetime()
+{
+  return _lifetime;
 }
 
 bool Human::isBeliever()
@@ -105,17 +116,22 @@ std::map <std::string, int> Human::attributes()
   return _attributes;
 }
 
-void Human::addSins(int whichCircle)
+std::vector<Sin> Human::committedSins()
 {
-  switch (whichCircle) {
-    case 1: _circle_1++; break;
-    case 2: _circle_2++; break;
-    case 3: _circle_3++; break;
-    case 4: _circle_4++; break;
-  }
+  return _committedSins;
 }
 
-void Human::die()
+int Human::numberOfAllSins()
 {
-  _isDead = true;
+  return _committedSins.size();
+}
+
+int Human::numberOfSins(int whichCircle)
+{
+  switch (whichCircle) {
+    case 1: return _circle_1;
+    case 2: return _circle_2;
+    case 3: return _circle_3;
+    case 4: return _circle_4;
+  }
 }
