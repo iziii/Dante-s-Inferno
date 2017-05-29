@@ -31,6 +31,9 @@ public:
   void die();
   int judgement();
   void examinationOfConscience(); //rachunek sumienia
+  void showData();
+  void showAttributes();
+
 
   //akcesory:
   std::string name();
@@ -39,7 +42,7 @@ public:
   bool isBeliever();
   bool isDead();
   std::map <std::string, int> attributes();
-  std::vector <Sin> committedSins();
+  std::vector<Sin> committedSins();
   int numberOfAllSins();
-  
+
 };

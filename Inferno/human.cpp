@@ -118,8 +118,41 @@ void Human::examinationOfConscience()
   printf("\nRachunek sumenia: \n");
   for(it = collection.begin(); it != collection.end(); it++)
   {
-    printf("\t%s : %ix\n", it -> first.c_str(), it -> second );
+    printf("\t%s: %ix\n", it -> first.c_str(), it -> second );
   }
+}
+
+void Human::showData()
+{
+  printf("%s, ", _name.c_str());
+  if(_gender == 0)
+  {
+    printf("mężczyzna, ");
+    if(_isBeliever)
+      printf("wierzący, " );
+        else printf("ateista, " );
+          printf("żył %i lat.\n\n", _lifetime );
+  }
+  else
+  {
+    printf("kobieta, ");
+      if(_isBeliever)
+        printf("wierząca, " );
+          else printf("ateistka, " );
+            printf("żyła %i lat.\n\n", _lifetime );
+  }
+  printf("Liczba popełnionych grzechów: %i.\n", numberOfAllSins());
+
+}
+
+void Human::showAttributes()
+{
+  std::map<std::string, int>::iterator it;
+  printf("\nCechy: \n");
+    for(it = _attributes.begin(); it != _attributes.end(); it++ )
+    {
+      printf("\t%s: %d%c \n", it -> first.c_str(), it -> second, 37);
+    }
 }
 
 std::string Human::name()
