@@ -11,16 +11,15 @@ std::vector <Human> Human::createPeople(int n)
 
 Human::Human()
 {
-
   _isDead = false;
   _gender = rand() % 2 == 0 ? male : female;
   _lifetime = rand() % 100 + 1;
   _isBeliever = rand() % 2;
 
-  _circle_1 = 0;
-  _circle_2 = 0;
-  _circle_3 = 0;
-  _circle_4 = 0;
+  _numberOfSins[0] = 0;
+  _numberOfSins[1] = 0;
+  _numberOfSins[2] = 0;
+  _numberOfSins[3] = 0;
 
   _name = Names::name(_gender);
 
@@ -36,7 +35,6 @@ Human::Human()
 
 void Human::commitSins(Sin *sin)
 {
-
   int chance = rand () % 100;
 
   std::map <std::string, int> requirements = sin -> requirements();
@@ -57,7 +55,7 @@ void Human::commitSins(Sin *sin)
               {
 
                 if(it_requirements -> first == it_attributes2 -> first
-                   && it_requirements -> second <= it_attributes2 -> second && chance >= 50)
+                   && it_requirements -> second <= it_attributes2 -> second && chance >= 60)
                     {
                        _committedSins.push_back(*sin);
                         addSins(sin -> circle());
@@ -70,17 +68,38 @@ void Human::commitSins(Sin *sin)
 
 void Human::addSins(int whichCircle)
 {
-  switch (whichCircle) {
-    case 1: _circle_1++; break;
-    case 2: _circle_2++; break;
-    case 3: _circle_3++; break;
-    case 4: _circle_4++; break;
+  switch (whichCircle)
+  {
+      case 1: _numberOfSins[0]++; break;
+      case 2: _numberOfSins[1]++; break;
+      case 3: _numberOfSins[2]++; break;
+      case 4: _numberOfSins[3]++; break;
   }
 }
 
 void Human::die()
 {
   _isDead = true;
+}
+
+int Human::judgement()
+{
+  if( numberOfAllSins() == 0 && _isBeliever == true) return 0;
+  else if( numberOfAllSins() == 0 && _isBeliever == false ) return 1;
+  else
+  {
+    int i_max = 0, max = _numberOfSins[0];
+
+      for(int i = 0; i < 4 ; i++)
+      {
+        if(_numberOfSins[i] > max)
+            {
+              max = _numberOfSins[i];
+              i_max = i;
+            }
+      }
+      return ++i_max;
+  }
 }
 
 std::string Human::name()
@@ -121,14 +140,4 @@ std::vector<Sin> Human::committedSins()
 int Human::numberOfAllSins()
 {
   return _committedSins.size();
-}
-
-int Human::numberOfSins(int whichCircle)
-{
-  switch (whichCircle) {
-    case 1: return _circle_1;
-    case 2: return _circle_2;
-    case 3: return _circle_3;
-    case 4: return _circle_4;
-  }
 }

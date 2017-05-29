@@ -17,8 +17,8 @@ private:
   //popełnione grzechy:
   std::vector <Sin> _committedSins;
 
-  //zmienne przechowujące ilość popełnionych grzechów powiązanych z danym kręgiem:
-  int _circle_1, _circle_2, _circle_3, _circle_4;
+  //tablica, ktorej elementy to ilość popełnionych grzechów powiazanych z odpowiadajacym kręgiem:
+  int _numberOfSins[4];
 
 public:
   //metody klasy:
@@ -29,6 +29,7 @@ public:
   void commitSins(Sin *sin);
   void addSins(int whichCircle);
   void die();
+  int judgement();
 
   //akcesory:
   std::string name();
@@ -37,8 +38,7 @@ public:
   bool isBeliever();
   bool isDead();
   std::map <std::string, int> attributes();
-  std::vector<Sin> committedSins();
-  int numberOfAllSins(); //funkcja zwraca liczbę wszystkich popełnionych grzechów
-  int numberOfSins(int whichCircle); //funkcja zwraca liczbę grzechów powiązanych z danym kręgiem
+  std::vector <Sin> committedSins();
+  int numberOfAllSins();
 
 };
