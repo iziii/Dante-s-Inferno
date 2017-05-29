@@ -30,6 +30,7 @@ public:
   void addSins(int whichCircle);
   void die();
   int judgement();
+  void examinationOfConscience(); //rachunek sumienia
 
   //akcesory:
   std::string name();
@@ -40,5 +41,5 @@ public:
   std::map <std::string, int> attributes();
   std::vector <Sin> committedSins();
   int numberOfAllSins();
-
+  
 };

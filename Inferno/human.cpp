@@ -35,6 +35,7 @@ Human::Human()
 
 void Human::commitSins(Sin *sin)
 {
+
   int chance = rand () % 100;
 
   std::map <std::string, int> requirements = sin -> requirements();
@@ -55,7 +56,7 @@ void Human::commitSins(Sin *sin)
               {
 
                 if(it_requirements -> first == it_attributes2 -> first
-                   && it_requirements -> second <= it_attributes2 -> second && chance >= 60)
+                   && it_requirements -> second <= it_attributes2 -> second && chance > 50)
                     {
                        _committedSins.push_back(*sin);
                         addSins(sin -> circle());
@@ -102,6 +103,25 @@ int Human::judgement()
   }
 }
 
+void Human::examinationOfConscience()
+{
+  std::map <std::string, int> collection;
+  std::map <std::string, int>::iterator it;
+
+  for(size_t i =0; i < numberOfAllSins(); i++)
+  {
+    it = collection.find(_committedSins[i].name());
+      if (it != collection.end()) it -> second ++;
+        else collection.insert ( std::pair<std::string, int>(_committedSins[i].name(), 1) );
+  }
+
+  printf("\nRachunek sumenia: \n");
+  for(it = collection.begin(); it != collection.end(); it++)
+  {
+    printf("\t%s : %ix\n", it -> first.c_str(), it -> second );
+  }
+}
+
 std::string Human::name()
 {
   return _name;
@@ -112,7 +132,7 @@ enum gender Human::gender()
   return _gender;
 }
 
-short Human::lifetime()
+int Human::lifetime()
 {
   return _lifetime;
 }

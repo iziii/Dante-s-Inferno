@@ -156,19 +156,22 @@ int main(int argc, char const *argv[])
     {
       printf("\n*And the winner is...* \n\n" );
       printf("%s, ", winner -> name().c_str());
-      if(winner -> gender() == 0)  printf("mężczyzna, żył: %i lat.\n\n", winner -> lifetime());
+      if(winner -> gender() == 0)  printf("mężczyzna, żył: %i lat.\n", winner -> lifetime());
         else  printf("kobieta, żyła: %i lat.\n", winner -> lifetime());
 
-      printf("Liczba popełnionych grzechów ogółem: %i\n", winner -> numberOfAllSins());
+     printf("Liczba popełnionych grzechów ogółem: %i\n", winner -> numberOfAllSins());
 
       std::map <std::string, int> attributes = winner -> attributes();
 
       printf("\nCechy: \n");
-        for(it_attributes=attributes.begin(); it_attributes!=attributes.end(); it_attributes++ )
+        for(it_attributes = attributes.begin(); it_attributes != attributes.end(); it_attributes++ )
         {
           printf("\t %s : %d \n", it_attributes -> first.c_str(), it_attributes -> second);
         }
       }
+
+      winner -> examinationOfConscience();
+
       printf("\n--------------------------------------- \n");
     return 0;
   }
