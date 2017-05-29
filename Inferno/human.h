@@ -7,7 +7,7 @@ private:
   //dane:
   std::string _name;
   enum gender _gender;
-  short _lifetime;
+  int _lifetime;
   bool _isBeliever;
   bool _isDead;
 
@@ -34,7 +34,7 @@ public:
   //akcesory:
   std::string name();
   enum gender gender();
-  short lifetime();
+  int lifetime();
   bool isBeliever();
   bool isDead();
   std::map <std::string, int> attributes();
