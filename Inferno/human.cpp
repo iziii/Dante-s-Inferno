@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "human.h"
 
+std::map<std::string, int>::iterator it;
+
 std::vector <Human> Human::createPeople(int n)
 {
   std::vector <Human> people;
@@ -15,6 +17,7 @@ Human::Human()
   _gender = rand() % 2 == 0 ? male : female;
   _lifetime = rand() % 100 + 1;
   _isBeliever = rand() % 2;
+  depression = 0;
 
   _numberOfSins[0] = 0;
   _numberOfSins[1] = 0;
@@ -39,27 +42,28 @@ void Human::commitSins(Sin *sin)
   int chance = rand () % 100;
 
   std::map <std::string, int> requirements = sin -> requirements();
-  std::map<std::string, int>::iterator it_requirements = requirements.begin();
+  it = requirements.begin();
   std::map<std::string, int>::iterator it_attributes1, it_attributes2;
 
   for(it_attributes1 = _attributes.begin();
           it_attributes1 != _attributes.end();
             it_attributes1++)
   {
-      if(it_requirements -> first == it_attributes1 -> first
-          && it_requirements -> second <= it_attributes1 -> second)
+      if(it -> first == it_attributes1 -> first
+          && it -> second <= it_attributes1 -> second)
 
           {
-              for(it_requirements++, it_attributes2 = _attributes.begin();
+              for(it++, it_attributes2 = _attributes.begin();
                   it_attributes2 != _attributes.end();
                     it_attributes2++)
               {
 
-                if(it_requirements -> first == it_attributes2 -> first
-                   && it_requirements -> second <= it_attributes2 -> second && chance > 50)
+                if(it -> first == it_attributes2 -> first
+                   && it -> second <= it_attributes2 -> second && chance > 50)
                     {
                        _committedSins.push_back(*sin);
                         addSins(sin -> circle());
+                        guiltyConscience();
                       }
               }
           }
@@ -78,9 +82,44 @@ void Human::addSins(int whichCircle)
   }
 }
 
+void Human::guiltyConscience()
+{
+  float value = 0;
+  it = _attributes.find("degenerate");
+    if(it !=_attributes.end())
+    {
+      value =  100 - (it -> second) ;
+
+      int chance = rand () % 100;
+      if(chance > 50)
+        _isBeliever ? (depression += value/50) : (depression += value/100);
+      }
+
+}
+
 void Human::die()
 {
   _isDead = true;
+}
+
+bool Human::suicide(int year)
+{
+  int chance = rand () % 100;
+  if(depression > 100 && chance > 50)
+  {
+    _lifetime=year;
+
+    die();
+    data();
+
+    if(!_gender)
+      _data += "\nPopełnił samobójstwo na skutek depresji.";
+    else
+      _data += "\nPopełniła samobójstwo na skutek depresji.";
+
+    return true;
+  }
+  else return false;
 }
 
 int Human::judgement()
@@ -106,7 +145,6 @@ int Human::judgement()
 void Human::examinationOfConscience()
 {
   std::map <std::string, int> collection;
-  std::map <std::string, int>::iterator it;
 
   for(size_t i =0; i < numberOfAllSins(); i++)
   {
@@ -122,32 +160,45 @@ void Human::examinationOfConscience()
   }
 }
 
-void Human::showData()
+void Human::data()
 {
-  printf("%s, ", _name.c_str());
-  if(_gender == 0)
-  {
-    printf("mężczyzna, ");
+  std::ostringstream ss;
+
+  ss << _name;
+
+  if(!_gender)
+  {  ss << ", mężczyzna, ";
     if(_isBeliever)
-      printf("wierzący, " );
-        else printf("ateista, " );
-          printf("żył %i lat.\n\n", _lifetime );
+      ss << "wierzący, ";
+      else ss << "ateista, ";
+    ss << "żył ";
+    ss << _lifetime;
+    ss << " lat.";
   }
+
   else
   {
-    printf("kobieta, ");
-      if(_isBeliever)
-        printf("wierząca, " );
-          else printf("ateistka, " );
-            printf("żyła %i lat.\n\n", _lifetime );
+    ss << ", kobieta, ";
+    if(_isBeliever)
+      ss << "wierząca, ";
+      else ss << "ateistka, ";
+    ss << "żyła ";
+    ss << _lifetime;
+    ss << " lat.";
   }
-  printf("Liczba popełnionych grzechów: %i.\n", numberOfAllSins());
+  ss << "\nLiczba popełnionych grzechów: ";
+  ss << numberOfAllSins();
 
+  _data = ss.str();
+}
+
+void Human::showData()
+{
+  printf("\n%s\n", _data.c_str() );
 }
 
 void Human::showAttributes()
 {
-  std::map<std::string, int>::iterator it;
   printf("\nCechy: \n");
     for(it = _attributes.begin(); it != _attributes.end(); it++ )
     {

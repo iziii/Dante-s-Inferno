@@ -9,6 +9,7 @@
 #include <iterator>
 #include <algorithm>
 #include <math.h>
+#include <sstream>
 
 
 //My classes

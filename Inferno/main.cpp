@@ -5,11 +5,12 @@ int main(int argc, char const *argv[])
 {
   Names::init();
 
-  int amount = 666, numberOfAlive = amount; //liczba grzesznikow i zywych
-  int year = 0;
+  int numberOfPeople = 666, numberOfAlive = numberOfPeople; //liczba grzesznikow i zywych
+  int suicide = 0;
+  int year = 1;
 
   std::vector <Sin> sins = Sin::createSins();
-  std::vector <Human> people = Human::createPeople(amount);
+  std::vector <Human> people = Human::createPeople(numberOfPeople);
 
   Human *winner = new Human;
   *winner = people[0];
@@ -30,9 +31,21 @@ int main(int argc, char const *argv[])
         for(int j = 0; j < sins.size(); j++)
           people[i].commitSins(&sins[j]);
 
+          if(people[i].suicide(year))
+          {
+            circle_2.push_back(people[i]);
+
+            if(winner -> numberOfAllSins() < people[i].numberOfAllSins())
+              *winner = people[i];
+              suicide++;
+            numberOfAlive--;
+            continue;
+          }
+
           if(people[i].lifetime() == year )
           {
             people[i].die();
+            people[i].data();
 
           switch (people[i].judgement())
           {
@@ -70,58 +83,53 @@ int main(int argc, char const *argv[])
       {
         circle_0[i].showData();
         circle_0[i].showAttributes();
-
         printf("\n--------------------------------------- \n");
       }
     }
+
     printf("\n\t***PIEKŁO***\n");
 
     printf("\nKRĄG I *POŻĄDANIE* \n\tTutaj trafiło: ");
       printf("%zu ludzi\n", circle_1.size() );
-      /*statystyki ludzi, ktorzy tutaj trafili:
+    /*  statystyki ludzi, ktorzy tutaj trafili:
       for(int i=0; i < circle_1.size(); i++)
       {   std::map <std::string, int> attributes = circle_1[i].attributes();
           circle_1[i].showData();
-
-          printf("--------------------------------------- \n");
-
+          printf("\n--------------------------------------- \n");
       }*/
+
     printf("\nKRĄG II *PRZEMOC* \n\tTutaj trafiło: ");
       printf("%zu ludzi\n", circle_2.size() );
+      printf("\tW tym: %i samobójców\n", suicide);
       /*jw.
       for(int i=0; i < circle_2.size(); i++)
       {   std::map <std::string, int> attributes = circle_2[i].attributes();
           circle_2[i].showData();
-
-          printf("--------------------------------------- \n");
-
+          printf("\n--------------------------------------- \n");
       }*/
+
   printf("\nKRĄG III *OSZUSTWO* \n\tTutaj trafiło: ");
     printf("%zu ludzi\n", circle_3.size() );
     /*jw.
     for(int i=0; i < circle_3.size(); i++)
     {   std::map <std::string, int> attributes = circle_3[i].attributes();
         circle_3[i].showData();
-
-        printf("--------------------------------------- \n");
-
+        printf("\n--------------------------------------- \n");
     }*/
+
   printf("\nKRĄG IV *ZDRADA* \n\tTutaj trafiło: ");
     printf("%zu ludzi\n", circle_4.size() );
     /*jw.
     for(int i=0; i < circle_4.size(); i++)
     {   std::map <std::string, int> attributes = circle_4[i].attributes();
         circle_4[i].showData();
-
-        printf("--------------------------------------- \n");
-
     }*/
 
-    printf("\n--------------------------------------- \n");
+   printf("\n--------------------------------------- \n");
 
     if(winner -> numberOfAllSins() != 0)
     {
-      printf("\n*And the winner is...* \n\n" );
+      printf("\n*And the winner is...* \n" );
 
       winner -> showData();
       winner -> showAttributes();

@@ -10,6 +10,8 @@ private:
   int _lifetime;
   bool _isBeliever;
   bool _isDead;
+  float depression;
+  std::string _data;
 
   //cechy:
   std::map <std::string, int> _attributes;
@@ -28,12 +30,14 @@ public:
   Human();
   void commitSins(Sin *sin);
   void addSins(int whichCircle);
+  void guiltyConscience(); //wyrzuty sumienia?
   void die();
-  int judgement();
+  bool suicide(int year);
+  int judgement(); //wyrok - do ktorego kregu powinien trafic czlowiek
   void examinationOfConscience(); //rachunek sumienia
-  void showData();
-  void showAttributes();
-
+  void data();
+  void showData(); //pokaz podstawowe dane
+  void showAttributes(); //pokaz cechy
 
   //akcesory:
   std::string name();
