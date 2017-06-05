@@ -61,7 +61,7 @@ void Human::commitSins(Sin *sin)
               {
 
                 if(it -> first == it_attributes2 -> first
-                   && it -> second <= it_attributes2 -> second && chance > 70)
+                   && it -> second <= it_attributes2 -> second && chance > 60)
                     {
                        _committedSins.push_back(*sin);
                         addSins(sin -> circle());
@@ -93,8 +93,8 @@ void Human::guiltyConscience()
       value =  100 - (it -> second) ;
 
       int chance = rand () % 100;
-      if(chance > 50)
-        _isBeliever ? (depression += value/50) : (depression += value/100);
+      if(chance > 60)
+        _isBeliever ? (depression += value/50) : (depression += value/70);
       }
 
 }
@@ -108,7 +108,7 @@ void Human::die()
 bool Human::suicide(int year)
 {
   int chance = rand () % 100;
-  if(depression > 100 && chance > 50)
+  if((depression > 75  && chance > 90) || depression >= 100 )
   {
     _lifetime=year;
 

@@ -15,8 +15,8 @@ int main(int argc, char const *argv[])
   Human *winner = new Human;
   *winner = people[0];
 
-  std::vector <Human> circle_0; //ewenementy?
-  std::vector <Human> circle_1; //POŻĄDANIE
+  std::vector <Human> circle_0; //ewenementy? (niegrzeszacy wierzacy)
+  std::vector <Human> circle_1; //POŻĄDANIE (łacznie z LIMBO tj. poziom dla niegrzgrzeszacych, ale niewierzących)
   std::vector <Human> circle_2; //PRZEMOC
   std::vector <Human> circle_3; //OSZUSTWO
   std::vector <Human> circle_4; //ZDRADA
