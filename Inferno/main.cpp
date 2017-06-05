@@ -33,19 +33,21 @@ int main(int argc, char const *argv[])
 
           if(people[i].suicide(year))
           {
+            suicide++;
             circle_2.push_back(people[i]);
 
             if(winner -> numberOfAllSins() < people[i].numberOfAllSins())
               *winner = people[i];
-              suicide++;
+
+            //people.erase(people.begin()+i);
             numberOfAlive--;
+
             continue;
           }
 
           if(people[i].lifetime() == year )
           {
             people[i].die();
-            people[i].data();
 
           switch (people[i].judgement())
           {
@@ -58,7 +60,7 @@ int main(int argc, char const *argv[])
             if(winner -> numberOfAllSins() < people[i].numberOfAllSins())
               *winner = people[i];
 
-        //    people.erase(people.begin()+i);
+            //people.erase(people.begin()+i);
             numberOfAlive--;
           }
       }

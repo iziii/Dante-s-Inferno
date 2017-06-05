@@ -26,14 +26,16 @@ Human::Human()
 
   _name = Names::name(_gender);
 
-  //Cechy, na razie przykladowe:
-  _attributes["cruel"] = rand() % 100;
-  _attributes["degenerate"] = rand() % 100;
-  _attributes["perverse"] = rand() % 100;
-  _attributes["bad"] = rand() % 100;
-  _attributes["insincere"] = rand () % 100;
-  _attributes["lecherous"] = rand () % 100;
-  //itd...
+  //Cechy:
+  _attributes["rozpustny"] = rand() % 100;
+  _attributes["zachłanny"] = rand() % 100;
+  _attributes["lubieżny"] = rand() % 100;
+  _attributes["perwersyjny"] = rand() % 100;
+  _attributes["zły"] = rand() % 100;
+  _attributes["gniewny"] = rand () % 100;
+  _attributes["zdegenerowany"] = rand () % 100;
+  _attributes["okrutny"] = rand () % 100;
+  _attributes["nieszczery"] = rand () % 100;
 }
 
 void Human::commitSins(Sin *sin)
@@ -59,7 +61,7 @@ void Human::commitSins(Sin *sin)
               {
 
                 if(it -> first == it_attributes2 -> first
-                   && it -> second <= it_attributes2 -> second && chance > 50)
+                   && it -> second <= it_attributes2 -> second && chance > 70)
                     {
                        _committedSins.push_back(*sin);
                         addSins(sin -> circle());
@@ -85,7 +87,7 @@ void Human::addSins(int whichCircle)
 void Human::guiltyConscience()
 {
   float value = 0;
-  it = _attributes.find("degenerate");
+  it = _attributes.find("zdegenerowany");
     if(it !=_attributes.end())
     {
       value =  100 - (it -> second) ;
@@ -100,6 +102,7 @@ void Human::guiltyConscience()
 void Human::die()
 {
   _isDead = true;
+  data();
 }
 
 bool Human::suicide(int year)
@@ -110,7 +113,6 @@ bool Human::suicide(int year)
     _lifetime=year;
 
     die();
-    data();
 
     if(!_gender)
       _data += "\nPopełnił samobójstwo na skutek depresji.";
